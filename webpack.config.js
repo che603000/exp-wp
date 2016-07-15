@@ -13,6 +13,9 @@ module.exports = {
         './src/main',
         'webpack-dev-server/client?http://localhost:8080'
     ],
+    externals:{
+        "jquery": "jQuery"
+    },
     output: {
         publicPath: '/',
         path: './public',
