@@ -50,7 +50,6 @@ export default class Chart {
         this.axixY = new this.AxisY();
     }
 
-
     clear() {
         this.ctx.clearRect(0, 0, this.width + 60, this.height + 20);
     }
@@ -191,7 +190,7 @@ export class AxisY {
 
     drawText(chart, y, text) {
         const h = 16, w = 35, {width} = chart;
-        //chart.ctx.clearRect(width, y - h + 2, w +4, h);
+        //view.ctx.clearRect(width, y - h + 2, w +4, h);
         chart.ctx.fillText(text, width + 10, y + 4);
     }
 
