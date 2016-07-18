@@ -9,7 +9,8 @@ export default class Base {
             strokeStyle: '#000',
             fillStyle: '#000',
             lineWidth: 1,
-        }
+            lineDashOffset: 0
+    }
     }
 
     get selectedStyle() {

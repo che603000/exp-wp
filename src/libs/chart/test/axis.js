@@ -79,7 +79,7 @@ export class AxisY extends Axis {
             pad = 10
 
         ctx.beginPath();
-        ctx.setLineDash([3]);
+        //ctx.setLineDash([5]);
         ctx.moveTo(-pad, point.y);
         ctx.lineTo(width + pad, point.y);
         ctx.stroke();

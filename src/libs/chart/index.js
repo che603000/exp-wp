@@ -8,7 +8,7 @@ import  './index.css'
 const $ = require('jquery');
 
 
-import Chart from "./view/chart";
+import Chart, {Marker} from "./view/chart";
 import {AxisX, AxisY} from "./test/axis";
 import Rect from "./test/rect";
 import Model from "./test/model";
@@ -22,6 +22,7 @@ const chart = new Chart(document.getElementById('cnv'), {
     padding:[30,30,40,30]
 });
 
+new Marker('.container', chart)
 
 chart.add(new Rect(new Model({
     id: 'blue',
@@ -46,28 +47,28 @@ chart.add(new Rect(new Model({
 
 chart.setSelected('red')
 chart.render();
+
+$('#cnv').on('click', e=> {
+    //debugger;
+    //$position.text(e.offsetX + ':' + e.offsetY);
+    console.log((e.offsetX + ':' + e.offsetY));
+    // ;
+    // const sel = chart.getLayers(e.offsetX, e.offsetY);
+    // console.log(sel);
+    // sel.length && chart.select(sel[0].id).render();
+});
 //
-// $('#cnv').on('click', e=> {
-//     //debugger;
-//     //$position.text(e.offsetX + ':' + e.offsetY);
-//     console.log((e.offsetX + ':' + e.offsetY));
-//     ;
-//     const sel = chart.getLayers(e.offsetX, e.offsetY);
-//     console.log(sel);
-//     sel.length && chart.select(sel[0].id).render();
-// });
 //
 //
-
-setTimeout(()=> {
-    chart.setFilter(['red','blue']).render();
-}, 2000)
-
-
-setTimeout(()=> {
-    chart.setFilter([]).render();
-}, 4000)
-
-setTimeout(()=> {
-    chart.setSelected(null).render();
-}, 5000)
+// setTimeout(()=> {
+//     chart.setFilter(['red','blue']).render();
+// }, 2000)
+//
+//
+// setTimeout(()=> {
+//     chart.setFilter([]).render();
+// }, 4000)
+//
+// setTimeout(()=> {
+//     chart.setSelected(null).render();
+// }, 5000)

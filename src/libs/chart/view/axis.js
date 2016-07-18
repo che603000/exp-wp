@@ -3,7 +3,7 @@
  */
 "use strict";
 
-import Base from './base'
+import Base from "./base";
 
 export default class Axis extends Base {
 
@@ -12,6 +12,7 @@ export default class Axis extends Base {
             strokeStyle: 'rgba(124,124,124,0.5)',
             fillStyle: '#000',
             lineWidth: 0.9,
+            lineDashOffset: 5,
             font: "12px serif"
         }
     }
