@@ -8,8 +8,9 @@ import  './index.css'
 const $ = require('jquery');
 
 
-import Chart, {Marker} from "./view/chart";
+import Chart from "./view/chart";
 import {AxisX, AxisY} from "./test/axis";
+import Marker from "./test/marker";
 import Rect from "./test/rect";
 import Model from "./test/model";
 
@@ -22,7 +23,11 @@ const chart = new Chart(document.getElementById('cnv'), {
     padding:[30,30,40,30]
 });
 
-new Marker('.container', chart)
+const marker =new Marker('.container', chart, {isClearOut: true});
+
+marker.on('move', (e) =>{
+    console.log(e);
+})
 
 chart.add(new Rect(new Model({
     id: 'blue',
@@ -35,17 +40,17 @@ chart.add(new Rect(new Model({
     id: 'red',
     alts: {min: 500, max: 1300},
     area: 3000,
-}), {style: {strokeStyle: 'red', fillStyle: 'rgba(100,0,0,0.5)'}}))
+}), {style: {strokeStyle: 'red', fillStyle: 'rgba(100,0,0,0.5)', lineWidth:2}}))
 
 
 chart.add(new Rect(new Model({
     id: 'black',
-    alts: {min: 300, max: 3500000},
+    alts: {min: 300, max: 350},
     area: 30
 }), {}))
 
 
-chart.setSelected('red')
+//chart.setSelected('red')
 chart.render();
 
 $('#cnv').on('click', e=> {

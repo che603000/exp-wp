@@ -14,7 +14,11 @@ module.exports = {
         'webpack-dev-server/client?http://localhost:8080'
     ],
     externals:{
-        "jquery": "jQuery"
+        "jquery": "jQuery",
+        //"backbone": "Backbone"
+    },
+    resolve: {
+        modulesDirectories: ['node_modules', 'bower_components', "ch_modules"]
     },
     output: {
         publicPath: '/',
@@ -28,7 +32,7 @@ module.exports = {
             {
                 test: /\.js$/,
                 include: path.join(__dirname, 'src'),
-                exclude: /node_modules|bower_components/,
+                exclude: ['node_modules','bower_components'],
                 loader: 'babel-loader',
 
                 query: {
@@ -47,6 +51,9 @@ module.exports = {
     plugins: [
         new webpack.OldWatchingPlugin(),
         //new BowerWebpackPlugin()
+        new webpack.ResolverPlugin(
+            new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin(".bower.json", ["main"])
+        )
     ],
     devServer: {
         contentBase: "./public"

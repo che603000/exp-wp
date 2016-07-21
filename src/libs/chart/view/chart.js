@@ -4,7 +4,8 @@
 "use strict";
 
 
-import Collection from "../data/collection";
+import Collection from "../model/collection";
+
 
 export default class Chart {
 
@@ -29,10 +30,6 @@ export default class Chart {
 
     }
 
-    get zero() {
-        return this._zero || {x: 0, y: 0};
-    }
-
     static create(container, options = {}) {
         const $cnt = $(container),
             $cnv = $('<canvas/>', {width: $cnt.width(), height: $cnt.height(), ... options});
@@ -43,7 +40,6 @@ export default class Chart {
     constructor(canvas, options = {}) {
         this._options = options;
         this._layers = {};
-        this._zero = options.zero;
         this.collection = new Collection([], {});
         this._filter = [];
         this._canvas = $(canvas).get(0);
@@ -140,57 +136,4 @@ export default class Chart {
     }
 }
 
-
-export class Marker {
-
-    get ctx() {
-        if (!this._ctx) {
-            this._ctx = this._canvas.getContext('2d');
-            //this._ctx.globalCompositeOperation = 'source-over';
-        }
-        return this._ctx;
-    }
-
-    get width() {
-        return this._chart.width;
-    }
-
-    get height() {
-        return this._chart.height;
-
-    }
-
-    constructor(container, chart) {
-        this._chart = chart;
-        this.$container = $(container);
-        const {width, height, padding} =  chart;
-
-        this._canvas = $(`<canvas  class="chart"/>`)
-            .attr({width, height})
-            .css({top: padding[0], left: padding[1]}).get(0);
-        $(container).append(this._canvas);
-        //document.createElement('canvar')
-        $(this._canvas).on('mousemove', this.onMove.bind(this))
-        $(this._canvas).on('mouseout', this.clear.bind(this))
-    }
-
-    onMove(e) {
-        //console.log((e.offsetX + ':' + e.offsetY));
-        this.clear();
-        this.drawLine(this.width, e.offsetY);
-    }
-
-    clear() {
-        this.ctx.clearRect(0, 0, this._chart.width * 2, this._chart.height * 2);
-    }
-
-    drawLine(width, y) {
-        this.ctx.beginPath();
-        this.ctx.setLineDash([5]);
-        this.ctx.moveTo(0, y);
-        this.ctx.lineTo(width, y);
-        this.ctx.stroke();
-
-    }
-}
 
