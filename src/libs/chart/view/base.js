@@ -2,14 +2,15 @@
  * Created by Администратор on 16.07.2016.
  */
 
-export default class Base {
+export default class Base{
 
     get defaultStyle() {
         return {
             strokeStyle: '#000',
             fillStyle: '#000',
             lineWidth: 1,
-        }
+            lineDashOffset: 0
+    }
     }
 
     get selectedStyle() {
@@ -26,6 +27,7 @@ export default class Base {
 
     constructor(attr, options = {}) {
         this._options = options;
+
     }
 
     draw(chart) {
@@ -39,3 +41,4 @@ export default class Base {
     }
 
 }
+

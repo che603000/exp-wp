@@ -4,7 +4,8 @@
 "use strict";
 
 
-import  Collection from '../data/collection'
+import Collection from "../model/collection";
+
 
 export default class Chart {
 
@@ -29,10 +30,6 @@ export default class Chart {
 
     }
 
-    get zero() {
-        return this._zero || {x: 0, y: 0};
-    }
-
     static create(container, options = {}) {
         const $cnt = $(container),
             $cnv = $('<canvas/>', {width: $cnt.width(), height: $cnt.height(), ... options});
@@ -43,7 +40,6 @@ export default class Chart {
     constructor(canvas, options = {}) {
         this._options = options;
         this._layers = {};
-        this._zero = options.zero;
         this.collection = new Collection([], {});
         this._filter = [];
         this._canvas = $(canvas).get(0);
@@ -57,6 +53,25 @@ export default class Chart {
 
     clear() {
         this.ctx.clearRect(0, 0, this.width * 2, this.height * 2);
+    }
+
+    clip(margin = [0, 0, 0, 0]) {
+        const {ctx, height, width} = this,
+            x = margin[0],
+            y = margin[1],
+            w = width + margin[2],
+            h = height + margin[3];
+
+
+        ctx.beginPath();
+        ctx.lineWidth = 0;
+        ctx.strokeStyle = 'rgba(0,0,0,0)';
+        ctx.moveTo(x, y);
+        ctx.lineTo(w, y);
+        ctx.lineTo(w, h);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+        this.ctx.clip();
     }
 
     add(layer) {
@@ -100,6 +115,8 @@ export default class Chart {
         this.ctx.translate(this.padding[0], this.padding[1]);
 
         const models = this.collection.filter(this.filter, this).reverse();
+        this.axisY.draw(this);
+        this.clip([-5, -5, 5, 5]);
 
         models
             .map(model=> this._layers[model.id])
@@ -107,7 +124,7 @@ export default class Chart {
                 layer.draw(this, this.selected === layer);
             }, this);
 
-        this.axisY.draw(this);
+
         this.ctx.restore();
         return this;
 
@@ -117,7 +134,6 @@ export default class Chart {
         this.selected = this._layers[id];
         return this;
     }
-
-
 }
+
 

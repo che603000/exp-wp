@@ -3,7 +3,7 @@
  */
 "use strict";
 
-import Base from '../data/model'
+import Base from '../model/model'
 
 export default class Model extends Base {
 

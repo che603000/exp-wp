@@ -10,6 +10,7 @@ const $ = require('jquery');
 
 import Chart from "./view/chart";
 import {AxisX, AxisY} from "./test/axis";
+import Marker from "./test/marker";
 import Rect from "./test/rect";
 import Model from "./test/model";
 
@@ -22,6 +23,11 @@ const chart = new Chart(document.getElementById('cnv'), {
     padding:[30,30,40,30]
 });
 
+const marker =new Marker('.container', chart, {isClearOut: true});
+
+marker.on('move', (e) =>{
+    console.log(e);
+})
 
 chart.add(new Rect(new Model({
     id: 'blue',
@@ -34,40 +40,40 @@ chart.add(new Rect(new Model({
     id: 'red',
     alts: {min: 500, max: 1300},
     area: 3000,
-}), {style: {strokeStyle: 'red', fillStyle: 'rgba(100,0,0,0.5)'}}))
+}), {style: {strokeStyle: 'red', fillStyle: 'rgba(100,0,0,0.5)', lineWidth:2}}))
 
 
 chart.add(new Rect(new Model({
     id: 'black',
-    alts: {min: 300, max: 3500000},
+    alts: {min: 300, max: 350},
     area: 30
 }), {}))
 
 
-chart.setSelected('red')
+//chart.setSelected('red')
 chart.render();
+
+$('#cnv').on('click', e=> {
+    //debugger;
+    //$position.text(e.offsetX + ':' + e.offsetY);
+    console.log((e.offsetX + ':' + e.offsetY));
+    // ;
+    // const sel = chart.getLayers(e.offsetX, e.offsetY);
+    // console.log(sel);
+    // sel.length && chart.select(sel[0].id).render();
+});
 //
-// $('#cnv').on('click', e=> {
-//     //debugger;
-//     //$position.text(e.offsetX + ':' + e.offsetY);
-//     console.log((e.offsetX + ':' + e.offsetY));
-//     ;
-//     const sel = chart.getLayers(e.offsetX, e.offsetY);
-//     console.log(sel);
-//     sel.length && chart.select(sel[0].id).render();
-// });
 //
 //
-
-setTimeout(()=> {
-    chart.setFilter(['red','blue']).render();
-}, 2000)
-
-
-setTimeout(()=> {
-    chart.setFilter([]).render();
-}, 4000)
-
-setTimeout(()=> {
-    chart.setSelected(null).render();
-}, 5000)
+// setTimeout(()=> {
+//     chart.setFilter(['red','blue']).render();
+// }, 2000)
+//
+//
+// setTimeout(()=> {
+//     chart.setFilter([]).render();
+// }, 4000)
+//
+// setTimeout(()=> {
+//     chart.setSelected(null).render();
+// }, 5000)
