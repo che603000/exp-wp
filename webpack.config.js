@@ -9,7 +9,7 @@ const path = require('path'),
 
 module.exports = {
     entry: {
-        app: './src/main',
+        app: './src/index',
         vendors: ['jquery', 'backbone','bootstrap-css'],
         "dev-server": 'webpack-dev-server/client?http://localhost:8080'
     },
@@ -77,6 +77,6 @@ module.exports = {
     devServer: {
         contentBase: "./public"
     },
-    //debug: true,
-   // devtool: 'source-map',
+    debug: true,
+    devtool: 'source-map',
 };
