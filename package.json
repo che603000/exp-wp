@@ -1,13 +1,13 @@
 {
-  "name": "exp",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "exp-wp",
+  "version": "0.0.1",
+  "private": true,
   "scripts": {
     "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js"
   },
   "author": "",
   "license": "ISC",
+  "dependencies": {},
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
@@ -26,6 +26,5 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
-  },
-  "dependencies": {}
+  }
 }

@@ -10,11 +10,11 @@ const path = require('path'),
 module.exports = {
     entry: {
         app: './src/index',
-        vendors: ['jquery', 'backbone','bootstrap-css'],
+        vendors: ['jquery', 'backbone', 'bootstrap-css'],
         "dev-server": 'webpack-dev-server/client?http://localhost:8080'
     },
     output: {
-        publicPath: './',
+        publicPath: '/',
         path: './public',
         filename: '[name].js'
     },
@@ -24,9 +24,7 @@ module.exports = {
     },
     resolve: {
         modulesDirectories: ['node_modules', 'bower_components'],
-        alias:{
-
-        }
+        alias: {}
     },
     module: {
         loaders: [
@@ -45,15 +43,14 @@ module.exports = {
                 loader: "style!css!autoprefixer!less"
             },
             {test: /\.css$/, loader: "style!css"},
-            { test: /\.(woff2?|svg)$/, loader: 'url?limit=10000' },
-            { test: /\.(ttf|eot)$/, loader: 'file' },
-            { test: /bootstrap-css.js/, loader: 'imports?jQuery=jquery' },
+            {test: /\.(woff2?|svg)$/, loader: 'url?limit=10000'},
+            {test: /\.(ttf|eot)$/, loader: 'file'},
+            {test: /bootstrap-css.js/, loader: 'imports?jQuery=jquery'},
         ],
     },
 
     plugins: [
         new webpack.OldWatchingPlugin(),
-        //new BowerWebpackPlugin()
         new BowerWebpackPlugin({
             modulesDirectories: ["bower_components"],
             manifestFiles: ".bower.json",
@@ -75,7 +72,13 @@ module.exports = {
     ],
 
     devServer: {
-        contentBase: "./public"
+        contentBase: "./public",
+        proxy: {
+            '/api/*': {
+                target: 'http://localhost:3000/',
+                secure: false
+            }
+        }
     },
     debug: true,
     devtool: 'source-map',

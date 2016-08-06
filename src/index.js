@@ -3,15 +3,21 @@
  */
 import './index.css'
 import App from './modules/app'
-
+//import './modules/reload'
 const app = new App();
 
-app.on('all', function(){
+app.on('all', function () {
     console.info(arguments);
 })
+const $ = require('jquery')
 
-console.log(app);
+$.get('/api/test', (d)=> {
+    console.log(d);
+    //alert(d)
+})
 
-app.isAuth = true;
+//console.log(app);
 
-app.save('./save');
+// app.isAuth = true;
+//
+// app.save('./save');
