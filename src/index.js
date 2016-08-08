@@ -1,23 +1,36 @@
 /**
  * Created by Администратор on 16.07.2016.
  */
-import './index.css'
-import App from './modules/app'
-//import './modules/reload'
-const app = new App();
+//const webix = require('webix/codebase/webix');
 
-app.on('all', function () {
-    console.info(arguments);
-})
-const $ = require('jquery')
+//import  webix from 'webix'///codebase/webix.js'
 
-$.get('/api/test', (d)=> {
-    console.log(d);
-    //alert(d)
-})
+//console.log(webix);
 
-//console.log(app);
+import './ui/map'
 
-// app.isAuth = true;
-//
-// app.save('./save');
+webix.ui({
+    rows: [
+        //{type: "header", template: "FPLN 7 WAW"},
+        {
+            cols: [
+                {template: "<p>Tree</p>", width: 250},
+                {view: "resizer"},
+                {
+                    rows: [
+                        {
+                            view: "leaflet-map",
+                            //id:"map",
+                            zoom: 7,
+                            center: [56, 43]
+
+                        },
+                        {view: "resizer",  hidden:false},
+                        {template: "<p>Tree</p>", height: 50, hidden:'auto'},
+
+                    ]
+                },
+            ]
+        }
+    ]
+});
