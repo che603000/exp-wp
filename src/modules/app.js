@@ -6,6 +6,7 @@ import $ from "jquery";
 
 const _private = {
     isAuth: false,
+    user:''
 };
 
 export default class App extends Event {
@@ -30,6 +31,14 @@ export default class App extends Event {
 
     set id(value) {
         this.__setProp('id', value, 'charge:id');
+    }
+
+    get user(){
+        return this._private['user'];
+    }
+
+    set user(value) {
+        this.__setProp('user', value, 'charge:user');
     }
 
     save(url) {

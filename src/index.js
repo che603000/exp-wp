@@ -7,26 +7,50 @@
 
 //console.log(webix);
 
-import './ui/map'
+import "./ui/map";
+import login from "./ui/login";
 
 webix.ui({
     rows: [
-        //{type: "header", template: "FPLN 7 WAW"},
+        {
+            view:"toolbar",
+            disabled:true,
+            cols:[
+                {type:'header', template: 'FPLN-8', width: 300 , border: false},
+                //{ view:"button", id:"LoadBut", value:"Load", width:100, align:"left" },
+                {},
+                { view:"button", value:"Save", width:100, align:"right" },
+
+                { view:"button", value:"Info", width:100, align:"right" }]
+        },
         {
             cols: [
-                {template: "<p>Tree</p>", width: 250},
-                {view: "resizer"},
+                {
+                    view: "accordion",
+                    width: 400,
+                    minWidth: 100,
+                    //multi:true,
+                    rows: [
+                        login,
+                        {header: "col 2", body: "content 2"},
+                        {header: "col 3", body: "content 3"}
+                    ]
+                },
+                {
+                    view: "resizer"
+                },
                 {
                     rows: [
                         {
                             view: "leaflet-map",
                             //id:"map",
                             zoom: 7,
-                            center: [56, 43]
+                            center: [56, 43],
+                            //height: '800',
 
                         },
-                        {view: "resizer",  hidden:false},
-                        {template: "<p>Tree</p>", height: 50, hidden:'auto'},
+                        {view: "resizer", hidden: false},
+                        {template: "<p>Tree</p>", height: 50, hidden: 'auto'},
 
                     ]
                 },
