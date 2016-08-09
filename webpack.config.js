@@ -11,7 +11,7 @@ const path = require('path'),
 module.exports = {
     entry: {
         app: './src/index',
-        vendors:['webix', 'leaflet'],
+        vendors:['webix'],//, 'leaflet'],
         //vendors: ['jquery', 'backbone', 'bootstrap-css', 'leaflet'],
         //plugins: ['Leaflet.Geodesic'],
         "dev-server": 'webpack-dev-server/client?http://localhost:8080'

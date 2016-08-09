@@ -2,11 +2,13 @@
  * Created by alex on 08.08.2016.
  */
 export default {
+    width: 400,
+    minWidth: 100,
     header: "Вход в систему",
     body: {
         view: "form",
         id: "myForm",
-        width: 300,
+
         elements: [
             {
                 view: "text",
